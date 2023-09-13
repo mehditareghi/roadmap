@@ -49,43 +49,51 @@ export default function Home() {
   // Example course data with due dates and importance levels
   const courses = [
     {
-      title: "Database",
-      instructor: "Quera College",
-      link: "https://quera.org/college/landpage/8939/database",
+      title: 'Database',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/8939/database',
       importance: 2,
-      dueDate: new Date("2023-10-17"), // Set the due date as a Date object
+      dueDate: new Date('2023-10-17'), // Set the due date as a Date object
       progress: 40,
     },
     {
-      title: "Fundamentals of Python",
-      instructor: "Quera College",
-      link: "https://quera.org/college/landpage/12547/fundamentals-of-python",
+      title: 'Programming Basics',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/2572/programming-basics-course',
+      importance: 5,
+      dueDate: new Date('2023-11-26'), // Set the due date as a Date object
+      progress: 22,
+    },
+    {
+      title: 'Fundamentals of Python',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/12547/fundamentals-of-python',
       importance: 3,
-      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
+      dueDate: new Date('2023-09-15'), // Set the due date as a Date object
       progress: 82,
     },
     {
-      title: "Machine Learning Introduction",
-      instructor: "Quera College",
-      link: "https://quera.org/college/landpage/8522/machine-learning-Introduction",
+      title: 'Machine Learning Introduction',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/8522/machine-learning-Introduction',
       importance: 1,
-      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
+      dueDate: new Date('2023-09-15'), // Set the due date as a Date object
       progress: 21,
     },
     {
-      title: "Git",
-      instructor: "Quera College",
-      link: "https://quera.org/college/landpage/8241/git",
+      title: 'Git',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/8241/git',
       importance: 4,
-      dueDate: new Date("2023-09-22"), // Set the due date as a Date object
+      dueDate: new Date('2023-09-22'), // Set the due date as a Date object
       progress: 60,
     },
     {
-      title: "Front-End",
-      instructor: "Quera College",
-      link: "https://quera.org/college/landpage/6092/front-end",
+      title: 'Front-End',
+      instructor: 'Quera College',
+      link: 'https://quera.org/college/landpage/6092/front-end',
       importance: 5,
-      dueDate: new Date("2023-11-19"), // Set the due date as a Date object
+      dueDate: new Date('2023-11-19'), // Set the due date as a Date object
       progress: 35,
     },
   ];
