@@ -62,8 +62,8 @@ export default function Home() {
       instructor: 'Quera College',
       link: 'https://quera.org/college/landpage/2572/programming-basics-course',
       importance: 5,
-      dueDate: new Date('2023-11-26'), // Set the due date as a Date object
-      progress: 22,
+      dueDate: new Date('2023-11-25'), // Set the due date as a Date object
+      progress: 26,
       status: 'In Progress',
     },
     {
