@@ -1,118 +1,137 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import Link from "next/link";
+import SimpleProgressBar from "@/components/SimpleProgressBar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // Define a function to calculate percentage based on progress and total
+  const calculatePercentage = (progress: any, total: any) => {
+    return ((progress / total) * 100).toFixed(2); // Limit to 2 decimal places
+  };
+
+  // Function to convert importance level to descriptive tags
+  const importanceToTags = (importance: number) => {
+    switch (importance) {
+      case 1:
+        return "Low Priority";
+      case 2:
+        return "Moderate Priority";
+      case 3:
+        return "High Priority";
+      case 4:
+        return "Very High Priority";
+      case 5:
+        return "Critical Priority";
+      default:
+        return "Unknown Priority";
+    }
+  };
+
+  // Function to get background color based on importance level
+  const getBackgroundColor = (importance: number) => {
+    switch (importance) {
+      case 1:
+        return "bg-blue-400"; // Low Priority - Blue background
+      case 2:
+        return "bg-yellow-400"; // Moderate Priority - Yellow background
+      case 3:
+        return "bg-green-400"; // High Priority - Green background
+      case 4:
+        return "bg-orange-400"; // Very High Priority - Orange background
+      case 5:
+        return "bg-red-400"; // Critical Priority - Red background
+      default:
+        return "bg-gray-400"; // Unknown Priority - Gray background
+    }
+  };
+
+  // Example course data with due dates and importance levels
+  const courses = [
+    {
+      title: "Database",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8939/database",
+      importance: 2,
+      dueDate: new Date("2023-10-17"), // Set the due date as a Date object
+      progress: 40,
+    },
+    {
+      title: "Fundamentals of Python",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/12547/fundamentals-of-python",
+      importance: 3,
+      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
+      progress: 82,
+    },
+    {
+      title: "Machine Learning Introduction",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8522/machine-learning-Introduction",
+      importance: 1,
+      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
+      progress: 21,
+    },
+    {
+      title: "Git",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8241/git",
+      importance: 4,
+      dueDate: new Date("2023-09-22"), // Set the due date as a Date object
+      progress: 60,
+    },
+    {
+      title: "Front-End",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/6092/front-end",
+      importance: 5,
+      dueDate: new Date("2023-11-19"), // Set the due date as a Date object
+      progress: 35,
+    },
+  ];
+
+  const sortedCourses = [...courses].sort(
+    (a, b) => b.importance - a.importance,
+  );
+
+  // Function to calculate days until due date
+  const calculateDaysTillDue = (dueDate: Date) => {
+    const currentDate = new Date();
+    const timeDifference = dueDate.getTime() - currentDate.getTime();
+    const daysTillDue = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+    return `Due in: ${daysTillDue} days`;
+  };
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+    <main className="min-h-screen p-4">
+      <h1 className="text-3xl font-semibold mb-4">My Courses</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {sortedCourses.map((course, index) => (
+          <Link key={index} href={course.link} target="_blank">
+            <div
+              className={`border border-gray-500 shadow-md p-4 cursor-pointer hover:shadow-lg bg-gray-100`}
+              key={index}
+            >
+              <div className="flex gap-2">
+                <h2 className="text-xl font-semibold">{course.title}</h2>
+                <p
+                  className={`text-black border border-black inline py-1 px-2 text-xs ${getBackgroundColor(
+                    course.importance,
+                  )}`}
+                >
+                  {importanceToTags(course.importance)}
+                </p>
+              </div>
+              <p className="text-gray-600">Instructor: {course.instructor}</p>
+              <p className="text-gray-600">
+                {calculateDaysTillDue(course.dueDate)}
+              </p>
+              <SimpleProgressBar progress={course.progress} />{" "}
+              {/* Example usage with 75% progress */}
+            </div>
+          </Link>
+        ))}
       </div>
     </main>
-  )
+  );
 }
