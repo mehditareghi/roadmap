@@ -80,7 +80,6 @@ export default function Home() {
       instructor: "Quera College",
       link: "https://quera.org/college/landpage/8522/machine-learning-Introduction",
       importance: 1,
-      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
       progress: 21,
       status: "In Progress",
     },
@@ -109,7 +108,8 @@ export default function Home() {
   );
 
   // Function to calculate days until due date
-  const calculateDaysTillDue = (dueDate: Date) => {
+  const calculateDaysTillDue = (dueDate?: Date, status?: string) => {
+    if (!dueDate || status === 'Done') return 'No due date!';
     const currentDate = new Date();
     const timeDifference = dueDate.getTime() - currentDate.getTime();
     const daysTillDue = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
@@ -124,8 +124,8 @@ export default function Home() {
           <Link key={index} href={course.link} target="_blank">
             <div
               className={`border border-gray-500 shadow-md p-4 cursor-pointer hover:shadow-lg bg-gray-100 ${
-                course.status === "Done" ? "border-green-500" : ""
-              } ${course.status === "Cancelled" ? "border-red-500" : ""}`}
+                course.status === "Done" ? "bg-green-300" : ""
+              } ${course.status === "Cancelled" ? "bg-red-300" : ""}`}
               key={index}
             >
               <div className="flex gap-2">
@@ -140,7 +140,7 @@ export default function Home() {
               </div>
               <p className="text-gray-600">Instructor: {course.instructor}</p>
               <p className="text-gray-600">
-                {calculateDaysTillDue(course.dueDate)}
+                {calculateDaysTillDue(course.dueDate, course.status)}
               </p>
               <SimpleProgressBar progress={course.progress} />{" "}
               {/* Example usage with 75% progress */}
