@@ -49,58 +49,58 @@ export default function Home() {
   // Example course data with due dates and importance levels
   const courses = [
     {
-      title: 'Database',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/8939/database',
+      title: "Database",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8939/database",
       importance: 2,
-      dueDate: new Date('2023-10-17'), // Set the due date as a Date object
+      dueDate: new Date("2023-10-17"), // Set the due date as a Date object
       progress: 40,
-      status: 'In Progress',
+      status: "In Progress",
     },
     {
-      title: 'Programming Basics',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/2572/programming-basics-course',
+      title: "Programming Basics",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/2572/programming-basics-course",
       importance: 5,
-      dueDate: new Date('2023-11-25'), // Set the due date as a Date object
-      progress: 39,
-      status: 'In Progress',
+      dueDate: new Date("2023-11-25"), // Set the due date as a Date object
+      progress: 55,
+      status: "In Progress",
     },
     {
-      title: 'Fundamentals of Python',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/12547/fundamentals-of-python',
+      title: "Fundamentals of Python",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/12547/fundamentals-of-python",
       importance: 3,
-      dueDate: new Date('2023-09-15'), // Set the due date as a Date object
+      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
       progress: 82,
-      status: 'Done',
+      status: "Done",
     },
     {
-      title: 'Machine Learning Introduction',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/8522/machine-learning-Introduction',
+      title: "Machine Learning Introduction",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8522/machine-learning-Introduction",
       importance: 1,
-      dueDate: new Date('2023-09-15'), // Set the due date as a Date object
+      dueDate: new Date("2023-09-15"), // Set the due date as a Date object
       progress: 21,
-      status: 'In Progress',
+      status: "In Progress",
     },
     {
-      title: 'Git',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/8241/git',
+      title: "Git",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/8241/git",
       importance: 4,
-      dueDate: new Date('2023-09-22'), // Set the due date as a Date object
+      dueDate: new Date("2023-09-22"), // Set the due date as a Date object
       progress: 60,
-      status: 'In Progress',
+      status: "In Progress",
     },
     {
-      title: 'Front-End',
-      instructor: 'Quera College',
-      link: 'https://quera.org/college/landpage/6092/front-end',
+      title: "Front-End",
+      instructor: "Quera College",
+      link: "https://quera.org/college/landpage/6092/front-end",
       importance: 5,
-      dueDate: new Date('2023-11-19'), // Set the due date as a Date object
+      dueDate: new Date("2023-11-19"), // Set the due date as a Date object
       progress: 35,
-      status: 'In Progress',
+      status: "In Progress",
     },
   ];
 
@@ -117,30 +117,33 @@ export default function Home() {
   };
 
   return (
-    <main className='min-h-screen p-4'>
-      <h1 className='text-3xl font-semibold mb-4'>My Courses</h1>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+    <main className="min-h-screen p-4">
+      <h1 className="text-3xl font-semibold mb-4">My Courses</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {sortedCourses.map((course, index) => (
-          <Link key={index} href={course.link} target='_blank'>
+          <Link key={index} href={course.link} target="_blank">
             <div
               className={`border border-gray-500 shadow-md p-4 cursor-pointer hover:shadow-lg bg-gray-100 ${
-                course.status === 'Done' ? 'border-green-500' : ''
-              } ${course.status === 'Cancelled' ? 'border-red-500' : ''}`}
+                course.status === "Done" ? "border-green-500" : ""
+              } ${course.status === "Cancelled" ? "border-red-500" : ""}`}
               key={index}
             >
-              <div className='flex gap-2'>
-                <h2 className='text-xl font-semibold'>{course.title}</h2>
+              <div className="flex gap-2">
+                <h2 className="text-xl font-semibold">{course.title}</h2>
                 <p
                   className={`text-black border border-black inline py-1 px-2 text-xs ${getBackgroundColor(
-                    course.importance
+                    course.importance,
                   )}`}
                 >
                   {importanceToTags(course.importance)}
                 </p>
               </div>
-              <p className='text-gray-600'>Instructor: {course.instructor}</p>
-              <p className='text-gray-600'>{calculateDaysTillDue(course.dueDate)}</p>
-              <SimpleProgressBar progress={course.progress} /> {/* Example usage with 75% progress */}
+              <p className="text-gray-600">Instructor: {course.instructor}</p>
+              <p className="text-gray-600">
+                {calculateDaysTillDue(course.dueDate)}
+              </p>
+              <SimpleProgressBar progress={course.progress} />{" "}
+              {/* Example usage with 75% progress */}
             </div>
           </Link>
         ))}
