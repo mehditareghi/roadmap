@@ -14,17 +14,17 @@ export default function Home() {
   const importanceToTags = (importance: number) => {
     switch (importance) {
       case 1:
-        return "Low Priority";
+        return "Low";
       case 2:
-        return "Moderate Priority";
+        return "Moderate";
       case 3:
-        return "High Priority";
+        return "High";
       case 4:
-        return "Very High Priority";
+        return "Very High";
       case 5:
-        return "Critical Priority";
+        return "Critical";
       default:
-        return "Unknown Priority";
+        return "Unknown";
     }
   };
 
